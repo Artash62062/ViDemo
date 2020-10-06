@@ -1,6 +1,5 @@
-package am.tech42.videmodemo.controllers;
+package am.tech42.videmodemo.controllers.VideoControllers;
 
-import am.tech42.videmodemo.configs.UserService;
 import am.tech42.videmodemo.model.Video;
 import am.tech42.videmodemo.repositories.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class VideoController {
@@ -27,4 +26,6 @@ public class VideoController {
         model.addAttribute("LoggedInUser",isAuthenticated);
         return"videos";
     }
+
+
 }

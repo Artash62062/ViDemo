@@ -1,6 +1,6 @@
-package am.tech42.videmodemo.configs;
+package am.tech42.videmodemo.configs.Security;
 
-import am.tech42.videmodemo.model.User;
+import am.tech42.videmodemo.configs.Security.MyAuthentificationSucssesHendler;
 import am.tech42.videmodemo.security.AuthentificationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,11 +10,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.security.PrivateKey;
 
 @Configuration
 @EnableWebSecurity
@@ -28,15 +25,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/login","/register").anonymous()
-                .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/profile","/profile/*").authenticated()
+                .and().exceptionHandling().accessDeniedPage("/")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login/process")
                 .usernameParameter("mail")
+                .successHandler(new MyAuthentificationSucssesHendler())
                 .failureUrl("/login?error=true")
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/");
+                .logout().logoutSuccessUrl("/");
 
     }
 

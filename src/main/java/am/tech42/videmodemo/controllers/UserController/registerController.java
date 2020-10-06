@@ -1,9 +1,7 @@
-package am.tech42.videmodemo.controllers;
+package am.tech42.videmodemo.controllers.UserController;
 
-import am.tech42.videmodemo.configs.UserService;
+import am.tech42.videmodemo.services.UserService;
 import am.tech42.videmodemo.model.User;
-import am.tech42.videmodemo.repositories.UserRepo;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +31,12 @@ public class registerController {
 
     @PostMapping("/register")
     public String addUser(User user, Model model){
-        User userFromDb = userService.getOne(user.getMail());
+        User userFromDb = userService.getOnebyEmail(user.getMail());
         if(userFromDb!= null) {
-            model.addAttribute("message", "User exist");
-            return "redirect:/login";
+            model.addAttribute("UserExist", true);
+            return "register";
         }
        // model.addAttribute("LoggedInUser",UserService.isUserLoggedIn());
-        user.setRole("ROLE_ADMIN");
         userService.add(user);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isAuthenticated = authentication != null && !(authentication instanceof AnonymousAuthenticationToken);

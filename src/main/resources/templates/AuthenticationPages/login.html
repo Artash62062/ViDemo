@@ -4,37 +4,71 @@
     <meta charset="UTF-8">
     <title>ViDemo Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <STYLE>
+        form[id=loginform] {
+            height: 400px;
+            width: 500px;
+            margin: auto;
+            margin-top: 200px;
+        }
+        div[id=empty] {
+            height: 20px;
+        }
+
+        a[id=text]{
+            height: 30px;
+            margin-top: 50px;
+        }
+
+        p[id=badCond] {
+            color: red;
+            margin: auto;
+            font-size: large;
+        }
+
+        form[id=signUpButton] {
+            width: 500px;
+            margin: auto;
+        }
+
+
+    </STYLE>
 </head>
 <body class="text-center">
 <div th:insert="blocks/header :: header"/>
-<form action="/login/process" method="post" class="form-signin">
+<form id = "loginform" action="/login/process" method="post" class="form-signin">
     <img class="mb-4" src="https://cdn0.iconfinder.com/data/icons/social-network-27/32/youtube_logo_website_video_hosting_sharing_service_application-512.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input name = "mail" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+    <div id="empty"></div>
     <label for="inputPassword" class="sr-only">Password</label>
     <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <div class="checkbox mb-3">
-        <label>
+        <label id = "checkbox">
             <input type="checkbox" value="remember-me"> Remember me
         </label>
     </div>
     <td>
         <span th:if="${error}">
-            <p style="margin: auto">Bad conditionals</p>
+            <p id="badCond"> Invalid Username or Email </p>
+            <br/>
         </span>
     </td>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <br/>
+    <a id = "text">Don't have an account yet ?</a>
+
 </form>
-<form style="height: 50px;margin: auto"  ></form>
-
-<a style="margin:auto">Don't have an account yet ?</a>
-
-<form action="/register" method="get">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    <form id="signUpButton" action="/register" method="get">
+    <button class="btn btn-lg btn-primary btn-block" >Sign up</button>
     <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
 </form>
+
+
+
+
 
 
 </body>

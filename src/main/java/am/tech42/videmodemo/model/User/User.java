@@ -1,7 +1,10 @@
 package am.tech42.videmodemo.model;
 
+import am.tech42.videmodemo.model.CommentsAndReactions.Comments;
+import am.tech42.videmodemo.model.CommentsAndReactions.Reactions;
+
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table (name = "users")
@@ -13,6 +16,24 @@ public class User {
     private String name;
     private String password;
     private String role;
+
+    @Column(name = "is_baned")
+    private Boolean isBaned;
+
+    @OneToMany(mappedBy = "user")
+    private List<Video> videos;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserActions> actions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Reactions> reactions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comments> comments;
+
+
+
 
     public long getId() {
         return id;
@@ -52,6 +73,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Boolean isBaned() {
+        return isBaned;
+    }
+
+    public void setBaned(Boolean baned) {
+        isBaned = baned;
     }
 }
 
