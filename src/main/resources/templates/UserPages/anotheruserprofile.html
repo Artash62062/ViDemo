@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:height="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+<div style="display: flex;justify-content: right">
+    <div id="userForm" style="display: flex;justify-content: right" class="">
+        <div class="image-container">
+            <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+        </div>
+        <div class="userData ml-3">
+            <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="/profile"><a style="color: black" th:text="${mail}"></a></a></h2>
+            <h6 class="d-block"><a style="color: black" href="javascript:void(0)">1,500</a><br/><a style="color: black"> Video Uploads</a></h6>
+            <h6 class="d-block"><a href="javascript:void(0)">300</a> Blog Posts</h6>
+            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

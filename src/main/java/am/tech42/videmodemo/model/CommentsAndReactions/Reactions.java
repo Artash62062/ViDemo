@@ -1,6 +1,7 @@
-package am.tech42.videmodemo.model;
+package am.tech42.videmodemo.model.CommentsAndReactions;
 
-import com.sun.istack.NotNull;
+import am.tech42.videmodemo.model.User.User;
+import am.tech42.videmodemo.model.Video.Video;
 
 import javax.persistence.*;
 

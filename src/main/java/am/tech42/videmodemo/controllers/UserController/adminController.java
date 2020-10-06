@@ -1,6 +1,5 @@
-package am.tech42.videmodemo.controllers;
+package am.tech42.videmodemo.controllers.UserController;
 
-import am.tech42.videmodemo.model.User;
 import am.tech42.videmodemo.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,7 +26,7 @@ public class adminController {
         if(chackisAdmin()==false) {
             return "redirect:/";
         }
-        return "/users";
+        return "UserPages/users";
     }
 
     private boolean chackisAdmin(){

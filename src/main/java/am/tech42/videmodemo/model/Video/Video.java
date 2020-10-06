@@ -1,7 +1,9 @@
-package am.tech42.videmodemo.model;
+package am.tech42.videmodemo.model.Video;
 
+import am.tech42.videmodemo.model.Actions.UserActions;
 import am.tech42.videmodemo.model.CommentsAndReactions.Comments;
 import am.tech42.videmodemo.model.CommentsAndReactions.Reactions;
+import am.tech42.videmodemo.model.User.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Video {
     private String name;
     private int views;
     private String src;
+    private String photoSrc;
     private String description;
 
     @ElementCollection(targetClass = VideoCategory.class)
@@ -104,5 +107,21 @@ public class Video {
 
     public void setReactions(List<Reactions> reactions) {
         this.reactions = reactions;
+    }
+
+    public String getPhotoSrc() {
+        return photoSrc;
+    }
+
+    public void setPhotoSrc(String photoSrc) {
+        this.photoSrc = photoSrc;
+    }
+
+    public List<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comments> comments) {
+        this.comments = comments;
     }
 }

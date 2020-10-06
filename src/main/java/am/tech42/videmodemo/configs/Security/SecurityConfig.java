@@ -1,6 +1,5 @@
 package am.tech42.videmodemo.configs.Security;
 
-import am.tech42.videmodemo.configs.Security.MyAuthentificationSucssesHendler;
 import am.tech42.videmodemo.security.AuthentificationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,14 +24,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/login","/register").anonymous()
-                .antMatchers("/profile","/profile/*").authenticated()
+                .antMatchers("/profile","/profile/**").authenticated()
                 .and().exceptionHandling().accessDeniedPage("/")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login/process")
                 .usernameParameter("mail")
-                .successHandler(new MyAuthentificationSucssesHendler())
+                .successHandler(new MyAuthenticationSuccessHandler())
                 .failureUrl("/login?error=true")
                 .and()
                 .logout().logoutSuccessUrl("/");

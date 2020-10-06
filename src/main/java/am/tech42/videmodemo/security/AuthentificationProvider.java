@@ -1,7 +1,6 @@
 package am.tech42.videmodemo.security;
 
-import am.tech42.videmodemo.configs.UserService;
-import am.tech42.videmodemo.model.User;
+import am.tech42.videmodemo.model.User.User;
 import am.tech42.videmodemo.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -10,13 +9,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
-import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,9 @@
-package am.tech42.videmodemo.model;
+package am.tech42.videmodemo.model.User;
 
+import am.tech42.videmodemo.model.Actions.UserActions;
 import am.tech42.videmodemo.model.CommentsAndReactions.Comments;
 import am.tech42.videmodemo.model.CommentsAndReactions.Reactions;
+import am.tech42.videmodemo.model.Video.Video;
 
 import javax.persistence.*;
 import java.util.List;

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
-public class MyAuthentificationSucssesHendler implements AuthenticationSuccessHandler {
+public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
                 throws IOException
@@ -21,9 +21,9 @@ public class MyAuthentificationSucssesHendler implements AuthenticationSuccessHa
         }
         else
         {
-            request.getSession(false).setMaxInactiveInterval(60*30);
+            request.getSession(false).setMaxInactiveInterval(60*60*60);
         }
         //Your login success url goes here, currently login success url="/"
-        response.sendRedirect("/");
+        response.sendRedirect("/profile");
     }
 }

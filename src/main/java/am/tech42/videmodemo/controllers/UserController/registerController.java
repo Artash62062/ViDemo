@@ -1,11 +1,8 @@
 package am.tech42.videmodemo.controllers.UserController;
 
 import am.tech42.videmodemo.services.UserService;
-import am.tech42.videmodemo.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import am.tech42.videmodemo.model.User.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,36 +15,38 @@ import java.util.List;
 
 @Controller
 public class registerController {
-    @Autowired
+    final
     UserService userService;
+
+    public registerController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/register")
     public String register(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isAuthenticated = authentication != null && !(authentication instanceof AnonymousAuthenticationToken);
-        model.addAttribute("LoggedInUser",isAuthenticated);
-        return "register";
+        IsAuthenticated.isUserAuthenticated(model);
+        return "AuthenticationPages/register";
     }
 
     @PostMapping("/register")
     public String addUser(User user, Model model){
         User userFromDb = userService.getOnebyEmail(user.getMail());
+        int userExistCode;
         if(userFromDb!= null) {
-            model.addAttribute("UserExist", true);
-            return "register";
+            userExistCode=1;
+            model.addAttribute("UserExistCode",userExistCode );
+            return "AuthenticationPages/register";
         }
-       // model.addAttribute("LoggedInUser",UserService.isUserLoggedIn());
+        userFromDb = userService.getOneByName(user.getName());
+        if(userFromDb!=null) {
+            userExistCode=2;
+            model.addAttribute("UserExistCode",2);
+            return "AuthenticationPages/register";
+        }
         userService.add(user);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isAuthenticated = authentication != null && !(authentication instanceof AnonymousAuthenticationToken);
-        model.addAttribute("LoggedInUser",isAuthenticated);
+        IsAuthenticated.isUserAuthenticated(model);
         List<GrantedAuthority> authorities = new ArrayList<>();
-        GrantedAuthority grantedAuthority= new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return user.getRole();
-            }
-        };
+        GrantedAuthority grantedAuthority= (GrantedAuthority) user::getRole;
         authorities.add(grantedAuthority);
 
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user,null,authorities));
