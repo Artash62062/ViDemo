@@ -1,0 +1,34 @@
+<div th:fragment="userform" xmlns:th="http://www.thymeleaf.org">
+<style>
+    div[id=userform] {
+        background-color:white;
+        font-size: large;
+        color: azure;
+        width: 300px;
+        height: 1080px;
+        margin-right: auto;
+    }
+</style>
+<div id = "userform">
+    <div class="d-flex justify-content-start">
+        <div class="image-container">
+            <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+        </div>
+        <div class="userData ml-3">
+            <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="/profile"><a style="color: black" th:text="${user.getName()}"></a></a></h2>
+            <h6 class="d-block"><a style="color: black" href="javascript:void(0)">1,500</a><br/><a style="color: black"> Video Uploads</a></h6>
+            <h6 class="d-block"><a href="javascript:void(0)">300</a> Blog Posts</h6>
+            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+        </div>
+
+    </div>
+
+    <br/>
+    <button class="btn btn-lg btn-secondary btn-block">Edit Videos</button>
+    <br/>
+    <button class="btn btn-lg btn-secondary btn-block">Button</button>
+    <br/>
+    <button class="btn btn-lg btn-secondary btn-block">Button</button>
+
+</div>
+</div>
