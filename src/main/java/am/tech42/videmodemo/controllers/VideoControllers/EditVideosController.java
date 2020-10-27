@@ -50,7 +50,8 @@ public class EditVideosController {
             return "redirect:uploadStatus";
         }
         User LogedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("VideoUploadSuccess",videoService.addVideo(video,VideoPicture,VideoName,Description,LogedInUser));
+        videoService.addVideo(video,VideoPicture,VideoName,Description,LogedInUser);
+        model.addAttribute("VideoUploadSuccess",true);
         return "VideoPages/upload";
     }
 

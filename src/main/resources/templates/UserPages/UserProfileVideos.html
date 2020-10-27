@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body style="background-color: darkgray ;height: 100%">
+<div th:insert="blocks/header :: header"/>
+
+
+<div class="container-fluid" style="height: 100%">
+    <div class="row" style="height: 100%">
+        <div class="col-lg-2" style="height: 100%; background-color: darkgray">
+            <div class="row" style="margin-top: 10px;height: 100%">
+                <div class="col-sm-6">
+                    <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                </div>
+                <div class="col-sm-6">
+                    <div class="userData">
+                        <h5 class="d-block" ><a style="color: black" th:text="${user.getName()}"></a></h5>
+                        <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <button class="btn btn-lg btn-secondary btn-block"><a href=""></a></button>
+            <br/>
+            <button class="btn btn-lg btn-secondary btn-block">Button</button>
+        </div>
+        <div class="col-lg-10 " style="background-color: white; min-height:1080px">
+            <div class="row">
+                <div th:each="video:${videos}" style="margin-top: 30px;margin-left: 30px">
+                    <a th:href="@{/videos/{id}(id=${video.getId()})}">
+                        <div class="card" style="width: 18rem;">
+                            <img th:src="*{'data:image/jpg;base64,'+ video.getPhoto()}" height="180" width="320" class="card-img-top" alt="..."/>
+                            <div class="card-body">
+                                <h6 class="card-title" th:text="${video.getName()}"></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

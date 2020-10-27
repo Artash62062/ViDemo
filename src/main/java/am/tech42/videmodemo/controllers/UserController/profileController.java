@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/profile")
 public class profileController {
     @Autowired
     UserService userService;
@@ -24,53 +25,26 @@ public class profileController {
     @Autowired
     ActionService actionService;
 
-
-    @GetMapping( path = {"/profile/{username}","/profile","/profile/{username}/{contentType}"})
-    public String showProfile(@PathVariable (required = false,name = "username") String username,
-                              @PathVariable (required = false,name = "contentType") String contentType,
-                              @RequestParam(required = false,name = "error") String error,
-                                      Model model )
-    {
+    @GetMapping()
+    public String showProfileActions(Model model) {
         IsAuthenticated.isUserAuthenticated(model);
-        User wantedUser = new User();
-        boolean isThisUser =false;
-        if (username!= null&& !(username.equals("error")) &&!(username.equals("activity")|| username.equals("videos"))){
-            User userFromDb = userService.getOneByName(username);
-            if(userFromDb == null) {
-                return "redirect:/profile?error=notfound";
-            }
-            isThisUser=false;
-            wantedUser=userFromDb;
-        } else if(error!= null){
-            model.addAttribute("isNotUserExist",true);
-            return "UserPages/UserProfile";
-        }
-        else {
-            wantedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            isThisUser = true;
-        }
-        if(username==null) {
-            return "redirect:/profile/"+ wantedUser.getName();
-        }
-        if(contentType==null && username.equals("activity")){
-        return "redirect:/profile/"+ wantedUser.getName() + "/activity";
-        }
-
-        if(contentType==null){
-            return "redirect:/profile/"+username+"/activity";
-        }
-
-        model.addAttribute("contextType",contentType);
-        model.addAttribute("user",wantedUser);
-        model.addAttribute("isAuthenticatedUser",isThisUser);
-        if(contentType.equals("activity")) {
-            List <UserActions> userActionsList = actionService.getUserActions(wantedUser);
-            model.addAttribute("actions", userActionsList);
-        }else if(contentType.equals("videos")) {
-            List<Video> userVideos = videoService.getUserVideos(wantedUser);
-            model.addAttribute("uservideos",userVideos);
-        }
-            return "UserPages/UserProfile";
+        boolean isThisUser = true;
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<UserActions> actions = actionService.getUserActions(user);
+        model.addAttribute("user",user);
+        model.addAttribute("actions",actions);
+        return "UserPages/UserProfileActions";
     }
-}
 
+    @GetMapping("/videos")
+    public String showProfileVideos(Model model) {
+        IsAuthenticated.isUserAuthenticated(model);
+        boolean isThisUser = true;
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Video> videos = videoService.getUserVideos(user);
+        model.addAttribute("user",user);
+        model.addAttribute("videos",videos);
+        return "UserPages/UserProfileVideos";
+    }
+
+}

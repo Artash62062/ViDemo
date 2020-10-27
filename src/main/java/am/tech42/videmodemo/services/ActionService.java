@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,11 +22,13 @@ public class ActionService {
     }
 
     @Transactional
-    public void addAction(User user, Video video, ActionsValue actionValue) {
+    public void addAction(User user, Video video, String actionValue) {
         UserActions userAction = new UserActions();
         userAction.setUser(user);
         userAction.setVideo(video);
         userAction.setActionsValue(actionValue);
+        userAction.setLocalDateTime(LocalDateTime.now());
         actionsRepo.save(userAction);
+
     }
 }

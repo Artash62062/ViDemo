@@ -4,8 +4,12 @@ import am.tech42.videmodemo.model.Actions.UserActions;
 import am.tech42.videmodemo.model.CommentsAndReactions.Comments;
 import am.tech42.videmodemo.model.CommentsAndReactions.Reactions;
 import am.tech42.videmodemo.model.Video.Video;
+import org.apache.commons.io.FileUtils;
 
 import javax.persistence.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @Entity
@@ -18,6 +22,51 @@ public class User {
     private String name;
     private String password;
     private String role;
+    private String profPicSrc;
+
+    public String getProfPicSrc() {
+        return profPicSrc;
+    }
+
+    public void setProfPicSrc(String profPicSrc) {
+        this.profPicSrc = profPicSrc;
+    }
+
+    public Boolean getBaned() {
+        return isBaned;
+    }
+
+    public List<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<Video> videos) {
+        this.videos = videos;
+    }
+
+    public List<UserActions> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<UserActions> actions) {
+        this.actions = actions;
+    }
+
+    public List<Reactions> getReactions() {
+        return reactions;
+    }
+
+    public void setReactions(List<Reactions> reactions) {
+        this.reactions = reactions;
+    }
+
+    public List<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comments> comments) {
+        this.comments = comments;
+    }
 
     @Column(name = "is_baned")
     private Boolean isBaned;
@@ -75,6 +124,11 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String profPic() throws IOException {
+        byte[] fileContent = FileUtils.readFileToByteArray(new File(profPicSrc));
+        return Base64.getEncoder().encodeToString(fileContent);
     }
 
     public Boolean isBaned() {

@@ -8,15 +8,29 @@
 </head>
 <body>
 <div th:insert="blocks/header :: header"/>
-
-</div>
-    <div class="container mt-5">
-        <div th:each="video: ${videos} ">
-            <video style="margin: auto" th:src="${video.getSrc()}"/>
+<div style="margin-right: 50px;margin-left: 50px;margin-top: 30px">
+    <div class="container-fluid" style="width: auto ;margin-right: auto" >
+        <div class="row">
+            <div th:each="video: ${videos} ">
+                <div class="col">
+                    <div class="row">
+                        <div class="col" >
+                            <a th:href="@{/videos/{id}(id=${video.getId()})}" style="color: black">
+                                <div class="card" style="width: 18rem; background-color:dimgray; ">
+                                    <img th:src="*{'data:image/jpg;base64,'+ video.getPhoto()}" height="180" width="320" class="card-img-top" alt="..."/>
+                                    <div class="card-body">
+                                        <h6 class="card-title" th:text="${video.getName()}"></h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
     </div>
+</div>
+
 
 </body>
 </html>

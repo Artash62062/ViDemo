@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ViDemo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="blocks/header :: header"/>
+<div class ="container-fluid" style="background-color: dimgray;min-height: 1080px" >
+    <br/>
+    <div class="row">
+        <div class = "col-lg-1"></div>
+        <div class = "col-lg-8">
+            <div class="row">
+                <video th:src="@{{id}/showvideo(id=${video.getId()})}" width="1080" height="600" type="video/mp4" controls> Video Name</video>
+            </div>
+            <div class="row">
+                <div class="card mb-3" style="width: 1080px; margin-top: 30px">
+                    <div class="card-header">
+                        <h5 th:text="${video.getUser().getName()}"></h5>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-md-1">
+                            <img src="..." class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${video.getName()}"></h5>
+                                <p class="card-text" th:text="${video.getDescription()}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div th:each="video:${userVideos}" style="background-color: white; margin-top: 10px">
+                <div class="card-header">
+                    <h5 th:text="${video.getUser().getName()}"></h5>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-md-3">
+                        <img th:src="*{'data:image/jpg;base64,'+ video.getPhoto()}" class="card-img" width="120" height="100">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <a th:href="@{/videos/{id}(id=${video.getId()})}"><h5 class="card-title" th:text="${video.getName()}"></h5></a>
+                            <p class="card-text" th:text="${video.getDescription()}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

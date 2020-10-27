@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" style="background-color: aquamarine">
+<html xmlns:th="http://www.thymeleaf.org" style="background-color: dimgray">
 <head>
     <meta charset="UTF-8">
     <title>ViDemo</title>
@@ -7,20 +7,38 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
 
-<body style="width: 500px;height:auto ; margin: auto ; background-color: aquamarine; margin-top: 300px">
-<h1 style=""> Video Upload Page</h1>
-<form style="margin-top: auto" method="POST" action="/profile/editvideos/upload" enctype="multipart/form-data">
+<body style="width: 700px; height:500px ; background-color: dimgray; border-style: wave; color: black; margin: auto;text-align:center ">
+<br/>
+<h1 style="margin: auto"> Video Upload Page</h1>
+    <form style="margin-inline: auto" method="POST" action="/profile/editvideos/upload" id="uploadForm" enctype="multipart/form-data">
+        <div class="container" style="margin-top:auto"></div>
+            <br/>
+            <div style="border-style: double; width: 400px; margin: auto" >
+                <h5 style="margin: auto"> Choose Video </h5>
+                <br/>
+                <input type="file" class="form-control-file" name="video" style="border-style: double; border-color: darkgrey; color: black;margin: auto;width: 300px">
+                <br/>
+            </div>
+            <br/>
+            <div style="border-style: double; width: 400px; margin: auto" >
+                <h5>Choose Photo For Video</h5>
+                <br/>
+                <input type="file" class="form-control-file" name="VideoPicture " style="border-style: double; border-color: darkgrey; color: black;margin: auto;width: 300px">
+                <br/>
 
-    <input type="file" name="video">
-    <input type="file" name="VideoPicture">
-    <input type="text" name="VideoName">
-    <input type="text" name="Description">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-
-</form>
-
-
-
+            </div>
+        <br/>
+            <div style="border-style: double; width: 400px; margin: auto" >
+                <br/>
+                <input type="text" style="width: 380px" name="VideoName" placeholder="Video Name">
+                <textarea form="uploadForm" style="margin-top:20px " name="Description" placeholder="About Video" cols="40" rows="10"></textarea>
+                <br/>
+                <br/>
+            </div>
+        <br/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button class="btn btn-lg btn-primary btn-block" style="width: 400px; margin: auto"  type="submit">Submit</button>
+        <br/>
+    </form>
 </body>
 </html>

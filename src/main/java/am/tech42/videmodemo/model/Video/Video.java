@@ -4,8 +4,15 @@ import am.tech42.videmodemo.model.Actions.UserActions;
 import am.tech42.videmodemo.model.CommentsAndReactions.Comments;
 import am.tech42.videmodemo.model.CommentsAndReactions.Reactions;
 import am.tech42.videmodemo.model.User.User;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.aspectj.util.FileUtil;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URL;
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
@@ -112,6 +119,12 @@ public class Video {
     public String getPhotoSrc() {
         return photoSrc;
     }
+
+    public String getPhoto() throws IOException {
+        byte[] fileContent = FileUtils.readFileToByteArray(new File(photoSrc));
+        return Base64.getEncoder().encodeToString(fileContent);
+    }
+
 
     public void setPhotoSrc(String photoSrc) {
         this.photoSrc = photoSrc;
