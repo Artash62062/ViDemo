@@ -1,4 +1,4 @@
-package am.tech42.videmodemo.controllers.VideoControllers;
+package am.tech42.videmodemo.controllers.RestControllers;
 
 import am.tech42.videmodemo.MultipartFileSender.MultipartFileSender;
 import am.tech42.videmodemo.model.Video.Video;

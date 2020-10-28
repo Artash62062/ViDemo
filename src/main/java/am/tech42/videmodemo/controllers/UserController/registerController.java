@@ -24,7 +24,6 @@ public class registerController {
 
     @GetMapping("/register")
     public String register(Model model){
-        IsAuthenticated.isUserAuthenticated(model);
         return "AuthenticationPages/register";
     }
 
@@ -44,7 +43,6 @@ public class registerController {
             return "AuthenticationPages/register";
         }
         userService.add(user);
-        IsAuthenticated.isUserAuthenticated(model);
         List<GrantedAuthority> authorities = new ArrayList<>();
         GrantedAuthority grantedAuthority= (GrantedAuthority) user::getRole;
         authorities.add(grantedAuthority);

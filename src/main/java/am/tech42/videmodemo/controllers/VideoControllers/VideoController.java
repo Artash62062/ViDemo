@@ -1,6 +1,6 @@
 package am.tech42.videmodemo.controllers.VideoControllers;
 
-import am.tech42.videmodemo.controllers.UserController.IsAuthenticated;
+
 import am.tech42.videmodemo.model.Video.Video;
 import am.tech42.videmodemo.repositories.VideoRepository;
 import am.tech42.videmodemo.services.VideoService;
@@ -46,7 +46,6 @@ public class VideoController {
 
     @GetMapping("{id}")
     public String showVideo (@PathVariable int id,Model model) throws IOException {
-        IsAuthenticated.isUserAuthenticated(model);
         Video currentVideo = videoService.getById(id);
         List <Video> userVideos = videoService.getUserVideos(currentVideo.getUser());
         model.addAttribute("video",currentVideo);

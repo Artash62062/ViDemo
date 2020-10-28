@@ -12,7 +12,6 @@ public class loginController {
         if(Boolean.TRUE.equals(error)) {
             model.addAttribute("error", true);
         }
-        IsAuthenticated.isUserAuthenticated(model);
         return "AuthenticationPages/login";
     }
 }

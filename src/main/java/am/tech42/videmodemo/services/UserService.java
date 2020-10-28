@@ -54,7 +54,7 @@ public class UserService {
 
     @Transactional
     public void add(User user){
-        user.setRole("ROLE_ADMIN");
+        user.setRole("ROLE_USER");
         user.setBaned(Boolean.FALSE);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);

@@ -27,7 +27,6 @@ public class profileController {
 
     @GetMapping()
     public String showProfileActions(Model model) {
-        IsAuthenticated.isUserAuthenticated(model);
         boolean isThisUser = true;
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<UserActions> actions = actionService.getUserActions(user);
@@ -38,7 +37,6 @@ public class profileController {
 
     @GetMapping("/videos")
     public String showProfileVideos(Model model) {
-        IsAuthenticated.isUserAuthenticated(model);
         boolean isThisUser = true;
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Video> videos = videoService.getUserVideos(user);
